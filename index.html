@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cause &amp; Effect Diagram</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Cause &amp; Effect Diagram</p>
+        <h1>Turn fishbone analysis into a fillable working form.</h1>
+        <p class="hero-text">
+          Capture a problem, organize contributing factors across the six classic categories, and watch the diagram update as you type.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <button type="button" id="saveButton" class="button button-primary">Save</button>
+        <button type="button" id="exportButton" class="button button-secondary">Export JSON</button>
+        <label class="button button-ghost" for="importInput">Import JSON</label>
+        <input id="importInput" type="file" accept="application/json" hidden>
+        <button type="button" id="resetButton" class="button button-ghost">Reset</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel form-panel">
+        <form id="diagramForm">
+          <div class="problem-grid">
+            <label class="field">
+              <span>Effect / Problem</span>
+              <input id="effect" name="effect" type="text" placeholder="Describe the problem you are analyzing">
+            </label>
+            <label class="field">
+              <span>Date</span>
+              <input id="analysisDate" name="analysisDate" type="date">
+            </label>
+          </div>
+
+          <div id="sectionsContainer" class="sections"></div>
+        </form>
+      </section>
+
+      <aside class="panel preview-panel">
+        <div class="preview-header">
+          <div>
+            <p class="eyebrow">Live Preview</p>
+            <h2>Fishbone Diagram</h2>
+          </div>
+          <button type="button" id="printButton" class="button button-secondary">Print View</button>
+        </div>
+        <div class="diagram-frame">
+          <div id="diagramCanvas" class="diagram-canvas" aria-live="polite"></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <template id="sectionTemplate">
+    <section class="category-card">
+      <div class="category-header">
+        <div>
+          <p class="category-kicker"></p>
+          <h3 class="category-title"></h3>
+        </div>
+        <button type="button" class="button button-inline add-cause">Add cause</button>
+      </div>
+      <label class="field">
+        <span>Section notes</span>
+        <textarea class="category-notes" rows="2" placeholder="Add context, observations, or assumptions"></textarea>
+      </label>
+      <div class="cause-list"></div>
+    </section>
+  </template>
+
+  <template id="causeRowTemplate">
+    <div class="cause-row">
+      <label class="field">
+        <span>Primary cause</span>
+        <input type="text" class="cause-text" placeholder="Describe the primary cause">
+      </label>
+      <label class="field">
+        <span>Sub-cause / detail</span>
+        <input type="text" class="subcause-text" placeholder="Add supporting detail">
+      </label>
+      <button type="button" class="button button-inline remove-cause">Remove</button>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
